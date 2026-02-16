@@ -1,0 +1,10 @@
+{
+  "rmse": 0.1118,
+  "mae": 0.0505,
+  "n_users": 610,
+  "n_items": 9724,
+  "n_ratings": 100836,
+  "rank": 50,
+  "iterations": 15,
+  "regularization": 0.1
+}
