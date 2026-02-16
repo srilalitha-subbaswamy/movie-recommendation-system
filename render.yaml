@@ -3,7 +3,6 @@ services:
   - type: web
     name: recsys-api
     runtime: docker
-    plan: free
     dockerfilePath: ./api/Dockerfile
     dockerContext: .
     healthCheckPath: /api/v1/health
@@ -36,7 +35,6 @@ services:
   - type: web
     name: recsys-frontend
     runtime: static
-    plan: free
     buildCommand: cd frontend && npm ci && npm run build
     staticPublishPath: ./frontend/dist
     routes:
