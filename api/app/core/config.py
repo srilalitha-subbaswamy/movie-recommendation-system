@@ -61,7 +61,7 @@ class Settings(BaseSettings):
         """
         if self.DATABASE_URL:
             url = self.DATABASE_URL
-            # Render provides postgres:// but asyncpg needs postgresql+asyncpg://
+            # Railway/Render provide postgres:// but asyncpg needs postgresql+asyncpg://
             if url.startswith("postgres://"):
                 url = url.replace("postgres://", "postgresql+asyncpg://", 1)
             elif url.startswith("postgresql://"):

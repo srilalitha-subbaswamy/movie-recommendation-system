@@ -69,3 +69,4 @@ derby.log
 
 # Jupyter
 .ipynb_checkpoints/
+.github/workflows/ci.yml

@@ -214,18 +214,25 @@ Each recommendation includes:
 
 ## Deployment
 
-### Render (Free Tier — Recommended)
+### Railway + Vercel (Free Tier — Recommended)
 
-1. Push your code to GitHub
-2. Go to [dashboard.render.com](https://dashboard.render.com) → **New Blueprint Instance**
-3. Connect your GitHub repo — Render auto-detects `render.yaml`
-4. Set secret environment variables:
+**Backend (Railway — $5 free credit/month):**
+
+1. Go to [railway.app](https://railway.app) → New Project → **Deploy from GitHub Repo**
+2. Select `movie-recommendation-system` — Railway detects the Dockerfile
+3. Add **PostgreSQL** and **Redis** plugins from the Railway dashboard
+4. Set environment variables on the API service:
    - `TMDB_API_KEY` — Get free at [themoviedb.org](https://www.themoviedb.org/settings/api)
-   - `GOOGLE_CLIENT_ID` — Optional, for Google Sign-In
-5. Deploy — Render builds API + frontend + PostgreSQL + Redis automatically
-6. The database auto-seeds on first startup via `scripts/start.sh`
+   - `CORS_ORIGINS` — `["https://your-app.vercel.app"]` (update after Vercel deploy)
+   - `JWT_SECRET` — Any random string
+5. The database auto-seeds on first startup
 
-> **Note:** Free-tier services spin down after 15 min of inactivity. First request after idle takes ~30-60s.
+**Frontend (Vercel — completely free):**
+
+1. Go to [vercel.com](https://vercel.com) → **Add New Project** → Import your GitHub repo
+2. Set **Root Directory** to `frontend`
+3. Add environment variable: `VITE_API_URL` = `https://your-api.up.railway.app` (your Railway API URL)
+4. Deploy — Vercel builds and serves the static site with zero cold starts
 
 ### Docker (Local Development)
 
