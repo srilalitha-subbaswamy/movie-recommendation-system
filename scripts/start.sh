@@ -5,13 +5,17 @@ set -e
 echo "=== Movie RecSys API Startup ==="
 echo "PORT=${PORT:-8000}"
 
+# Debug: print all env vars that look database/redis related (mask passwords)
+echo "--- Environment variables (DB/Redis related) ---"
+env | grep -iE "DATABASE|POSTGRES|PG|REDIS|RAILWAY" | sed 's/\(PASSWORD\|SECRET\|KEY\)=.*/\1=***masked***/' || true
+echo "--- End env vars ---"
+
 # Debug: check if DATABASE_URL is set
 if [ -z "$DATABASE_URL" ]; then
     echo "ERROR: DATABASE_URL is not set!"
-    echo "In Railway: go to API service -> Variables -> add DATABASE_URL = \${{Postgres.DATABASE_URL}}"
     echo "Falling back to defaults (will fail if no local DB)..."
 else
-    echo "DATABASE_URL is set (${#DATABASE_URL} chars, starts with: ${DATABASE_URL:0:15}...)"
+    echo "DATABASE_URL is set (${#DATABASE_URL} chars, starts with: ${DATABASE_URL:0:20}...)"
 fi
 
 if [ -z "$REDIS_URL" ]; then
