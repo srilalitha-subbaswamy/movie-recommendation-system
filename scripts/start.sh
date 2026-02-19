@@ -63,12 +63,9 @@ asyncio.run(check())
 
     echo "Movies in DB: $SEED_CHECK"
 
-    if [ "$SEED_CHECK" -lt 100 ]; then
-        echo "Database needs seeding..."
-        python scripts/seed_production.py || echo "Seeding failed, but server is running."
-    else
-        echo "Database already seeded, skipping."
-    fi
+    # Always run seed script — it skips already-seeded data internally
+    # but still fetches missing posters and updates stats
+    python scripts/seed_production.py || echo "Seeding failed, but server is running."
 fi
 
 # Keep the container alive
