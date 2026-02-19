@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Film, Home, Search, Sparkles, Star, User } from 'lucide-react'
+import { Film, Home, Search, Sparkles, Star } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 
 function Navbar() {

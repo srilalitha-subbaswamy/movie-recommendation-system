@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { User, Star, Film, ArrowRight, BarChart3 } from 'lucide-react'
+import { Star, Film, ArrowRight, BarChart3 } from 'lucide-react'
 import { useUser } from '../context/UserContext'
 import LoadingSpinner from '../components/LoadingSpinner'
 import { userApi } from '../services/api'
