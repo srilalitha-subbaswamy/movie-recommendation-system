@@ -24,6 +24,12 @@ else
     echo "REDIS_URL is set (${#REDIS_URL} chars)"
 fi
 
+if [ -z "$TMDB_API_KEY" ]; then
+    echo "WARNING: TMDB_API_KEY is not set — posters will not be fetched"
+else
+    echo "TMDB_API_KEY is set (${#TMDB_API_KEY} chars)"
+fi
+
 # Start uvicorn
 uvicorn app.main:app --host 0.0.0.0 --port "${PORT:-8000}" &
 UVICORN_PID=$!
@@ -65,7 +71,7 @@ asyncio.run(check())
 
     # Always run seed script — it skips already-seeded data internally
     # but still fetches missing posters and updates stats
-    python scripts/seed_production.py || echo "Seeding failed, but server is running."
+    python -u scripts/seed_production.py 2>&1 || echo "Seeding failed, but server is running."
 fi
 
 # Keep the container alive
